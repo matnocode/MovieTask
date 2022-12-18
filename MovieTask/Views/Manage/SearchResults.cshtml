@@ -1,0 +1,35 @@
+﻿@model List<MovieModel>
+
+<h1>Search query results(@Model.Count)</h1>
+<div class="row">
+@{
+
+    if (Model.Count > 0)
+    {
+        foreach (var movie in Model)
+        {
+            <div class="card col-xl-2 col-sm-6 col-md-4">
+                <div class="card-header text-center">
+                    <img class="w-100 card-img" src="@movie.Poster">
+                    <p class="card-title"><strong>@movie.Title</strong></p>
+                    <div class="d-inline">
+                        <p>Released: @movie.Released.Year.ToString()</p>
+                    </div>
+                </div>
+
+                <div class="card-body">
+                    <a class="btn btn-secondary">Edit</a>
+                    <a class="btn btn-outline-danger" asp-action="DeleteEntry" asp-controller="Manage"
+           asp-route-Id="@movie.Id">Delete</a>
+                </div>
+                <div class="card-footer"></div>
+            </div>
+        }
+    }
+    else
+    {
+        <h5 class="text-center" style="color:red;">No movies found!</h5>
+    }
+   
+}
+</div>

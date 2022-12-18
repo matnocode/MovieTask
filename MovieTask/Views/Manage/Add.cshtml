@@ -1,0 +1,70 @@
+﻿@model ManageMovieModel
+
+@{
+    ViewData["Title"] = "Add Movie";
+}
+<h3 class="text-center">Add Movie To Database</h3>
+
+@*Html.renderpartial to render movie cards*@
+
+<div class="row ">
+    <div class="col-lg-5 col-sm-8 mx-auto ">
+        <form asp-action="OnAdd" asp-area="" asp-controller="Manage" class="addForm" method="post">
+
+            <div class="form-group form-control  mt-sm-5 mt-lg-2 mt-5">
+                <p class="text-center" style="color:red"><strong>Required</strong></p>
+                <label class="form-label">Title</label>
+                <input type="text" class="form-control" placeholder="Enter Title..." asp-for=Title />
+                <hr />
+                <label class="form-label">Description</label>
+                <textarea placeholder="Enter Description..." asp-for=Description class="form-control"></textarea>
+            </div>
+
+            <div class="form-group  form-control mt-sm-5 mt-lg-2 mt-5">
+                <p class="text-center"> <strong>Released</strong> </p>
+                <label class="form-label">Release Date</label>
+                <input type="date" asp-for="Released" class="form-control" />
+            </div>
+
+            <div class="form-group form-control  mt-sm-5 mt-lg-2 mt-5">
+                <p class="text-center"> <strong>Actors and Genres</strong> </p>
+                <label class="form-label">Actors (comma separated)</label>
+                <input type="text" asp-for="Actors" class="form-control" />
+                <hr />
+                <p><strong>Select Genres</strong></p>
+               
+                 <select class="form-select" asp-for="Genre" multiple>
+                    <option selected disabled>Select Genres</option>
+                    @{
+                        for (int i = 0; i < Enum.GetValues(typeof(MovieTask.Models.MovieGenre)).Cast<int>().Max() + 1; i++) //+1 bc IDK it works that way
+                        {
+                            string name = @Enum.GetNames(typeof(MovieTask.Models.MovieGenre))[i];
+                            <option value="@name">@name</option>
+                        }
+                    }
+                </select>
+            </div>
+
+            <div class="form-group form-control  mt-sm-5 mt-lg-2 mt-5">
+                <p class="text-center"> <strong>Images</strong> </p>
+                <p class="alert-danger">need implementation</p>
+                <label class="form-label">Poster</label>
+                
+                <input type="file"/>
+                <hr />
+                <input class="form-control" type="text" asp-for="Poster" placeholder="Enter URL..." />
+                <hr />
+                <p class="alert-danger">need implementation</p>
+                <label class="form-label">Background</label>
+               
+                
+                <input type="file" />
+        
+                <hr />
+                <input class="form-control" type="text" asp-for="Background" placeholder="Enter URL..." />
+            </div>
+                
+            <button class="btn btn-success" type="submit">Submit</button>
+        </form>
+    </div>
+</div>

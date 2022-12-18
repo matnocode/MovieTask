@@ -1,0 +1,36 @@
+﻿@model SearchMovieModel 
+<h1>Search</h1>
+<form asp-controller="Manage" method="post" asp-action="OnSearch" class="form-control">
+    <div class="row">
+        <div class="col-10">
+            <input type="text" asp-area="SearchText" asp-for="SearchTitle" class="form-control d-inline" placeholder="Search..." />
+        </div>
+        <div class="col-2">
+            <button class="btn btn-secondary">Search</button>
+        </div>
+    </div>
+
+    <div class="mt-3 w-50">
+        <p><strong>Year</strong></p>
+        <select class="form-select" asp-for="Year">
+            @{
+                <option selected disabled>Select Year</option>
+                for (int i = DateTime.Now.Year; i >1900; i--)
+                {
+                        <option value="@i" >@i</option>
+                }
+            }
+            
+        </select>
+    </div>
+    <div class="mt-3">
+        <p><strong>Genre</strong></p>
+        <input type="checkbox" asp-for="@Model.Comedy" placeholder="comedy" />Comedy
+        <input type="checkbox" asp-for="@Model.Drama" placeholder="drama" />Drama
+        <input type="checkbox" asp-for="@Model.Action" placeholder="action" />Action
+    </div>      
+
+    
+
+
+</form>
